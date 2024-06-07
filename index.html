@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Net</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="script.js" defer></script>
+    <script src="nn.js" defer></script>
+    <script src="neuralViz.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <style>
+         canvas {
+            border: 1px solid black;
+        }
+         .debug {
+            border: 1px solid rgb(245, 12, 12);
+        }
+    </style>
+
+</head>
+<body>
+    <div x-data="{ counter: new Counter() }">
+        <h1 x-text="counter.count"></h1>
+        <button @click="counter.increment()">Increment</button>
+        <button @click="counter.decrement()">Decrement</button>
+    </div>
+
+    <div x-data>
+        <h1 x-text="$store.state.count"></h1>
+        <button @click="$store.state.increment()">Increment</button>
+        <button @click="$store.state.decrement()">Decrement</button>
+    </div>
+
+    <div x-data="{ table: new Table([
+        { id: 1, name: 'Alice', age: 25 },
+        { id: 2, name: 'Bob', age: 30 },
+        { id: 3, name: 'Charlie', age: 35 }
+    ]) }">
+    <!-- Dynamic Table Injection -->
+    <div x-html="table.generate()"></div>
+    <div x-html="table.generateForm()"></div>
+    
+    </div>
+
+    
+
+    <div x-data="new NetworkViz(3, 5, 2)" x-init="init()" class="flex gap-3 mb-6">
+        <canvas x-ref="networkCanvas" width="400" height="300"></canvas>
+        <canvas x-ref="errorCanvas" width="200" height="200" class="h-fit"></canvas>
+    </div>
+</body>
+
+</html>
